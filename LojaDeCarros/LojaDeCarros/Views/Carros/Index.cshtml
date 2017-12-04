@@ -1,0 +1,60 @@
+﻿@model IEnumerable<LojaDeCarros.Models.Carro>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Carros</h2>
+<p>
+    @Html.ActionLink("Novo Cliente", "New", null, new { @class = "btn btn-primary" })
+</p>
+
+<table id="carros" style="width:100%">
+    <tr>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Ano</th>
+        <th>Ver</th>
+        <th>Editar</th>
+        <th>Remover</th>
+    </tr>
+    @foreach (var carro in @Model)
+    {
+        <tr>
+            <td>@carro.Marca</td>
+            <td>@carro.Modelo</td>
+            <td>@carro.Ano</td>
+            <td>@Html.ActionLink("Ver", "Details", new { carro.Id }, new { @class = "btn btn-primary" })</td>
+            <td>@Html.ActionLink("Editar", "Edit", new { carro.Id }, new { @class = "btn btn-primary" })</td>
+            <td><button data-carros-id="@carro.Id" class="btn-link js-delete">Remover</button></td>
+        </tr>
+
+    }
+</table>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#carros").on("click", ".js-delete",
+                function () {
+                    var button = $(this);
+                    bootbox.confirm("Tem certeza que deseja remover?",
+                        function (result) {
+                            if (result) {
+                                $.ajax({
+                                    url: "/carros/delete/" + button.attr("data-carros-id"),
+                                    method: "GET",
+                                    success: function () {
+                                        button.parents("tr").remove();
+                                    }
+                                });
+                            }
+                        });
+
+                });
+        });
+    </script>
+}
+
+
+

@@ -6,6 +6,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace LojaDeCarros.Models
 {
+   
+    
     // É possível adicionar dados do perfil do usuário adicionando mais propriedades na sua classe ApplicationUser, visite https://go.microsoft.com/fwlink/?LinkID=317594 para obter mais informações.
     public class ApplicationUser : IdentityUser
     {
@@ -20,6 +22,10 @@ namespace LojaDeCarros.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Carro> Carros { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Fornecedor> Fornecedores { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

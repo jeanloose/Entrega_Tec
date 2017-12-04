@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Usuarios</h2>
+<p>
+    @Html.ActionLink("Novo Cliente", "New", null, new { @class = "btn btn-primary" })
+</p>
+
+<table id="usuarios" style="width:100%">
+    <tr>
+        <th>Nome</th>
+        <th>E-mail</th>
+        <th>Senha</th>
+        <th>Ver</th>
+        <th>Editar</th>
+        <th>Remover</th>
+    </tr>
+    @foreach (var usuario in @Model)
+    {
+        <tr>
+            <td>@usuario.Nome</td>
+            <td>@usuario.Email</td>
+            <td>@usuario.Senha</td>
+            <td>@Html.ActionLink("Ver", "Details", new { usuario.Id }, new { @class = "btn btn-primary" })</td>
+            <td>@Html.ActionLink("Editar", "Edit", new { usuario.Id }, new { @class = "btn btn-primary" })</td>
+            <td><button data-usuarios-id="@usuario.Id" class="btn-link js-delete">Remover</button></td>
+        </tr>
+
+    }
+</table>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#usuarios").on("click", ".js-delete",
+                function () {
+                    var button = $(this);
+                    bootbox.confirm("Tem certeza que deseja remover?",
+                        function (result) {
+                            if (result) {
+                                $.ajax({
+                                    url: "/usuarios/delete/" + button.attr("data-usuarios-id"),
+                                    method: "GET",
+                                    success: function () {
+                                        button.parents("tr").remove();
+                                    }
+                                });
+                            }
+                        });
+
+                });
+        });
+    </script>
+}

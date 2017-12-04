@@ -1,0 +1,36 @@
+﻿
+@model LojaDeCarros.Models.Cliente
+@{
+    ViewBag.Title = "Novo Cliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Cliente</h2>
+@using (Html.BeginForm("Save", "Clientes"))
+{
+    @Html.HiddenFor(m => m.Id)
+    <div class="form-group">
+        @Html.LabelFor(m => m.Nome)
+        @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Nome)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Cpf)
+        @Html.TextBoxFor(m => m.Cpf, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Cpf)
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(function () {
+            $.validator.methods.date = function (value, element) {
+                Globalize.culture("pt-BR");
+                return this.optional(element) || Globalize.parseDate(value) !== null;
+            }
+        })
+    </script>
+}

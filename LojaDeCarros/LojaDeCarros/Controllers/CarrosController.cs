@@ -9,17 +9,95 @@ namespace LojaDeCarros.Controllers
 {
     public class CarrosController : Controller
     {
-        // GET: Carros
-        public ViewResult Random()
-        {
-            var carro = new Carro() {
-                id = 10,
-                marca = "HONDA",
-                modelo = "CIVIC",
-                ano = "2017"
-            };
+        private ApplicationDbContext _context;
 
-            return View(carro);
+        public CarrosController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
+        public ActionResult Index()
+        {
+            var carros = _context.Carros.ToList();
+
+            return View(carros);
+        }
+        public ActionResult Details(int id)
+        {
+            var carros = _context.Carros.SingleOrDefault(c => c.Id == id);
+            if (carros == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(carros);
+        }
+
+        public ActionResult New()
+        {
+            var carros = new Carro();
+
+            return View("CarroForm", carros);
+        }
+
+        [HttpPost] 
+
+        public ActionResult Save(Carro carros)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View("CarroForm", carros);
+            }
+
+            if (carros.Id == 0)
+            {
+                
+                _context.Carros.Add(carros);
+            }
+            else
+            {
+                var carrosInDb = _context.Carros.Single(c => c.Id == carros.Id);
+
+                carrosInDb.Marca = carros.Marca;
+                carrosInDb.Modelo = carros.Modelo;
+                carrosInDb.Ano = carros.Ano;
+
+            }
+
+            
+            _context.SaveChanges();
+            
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var carros = _context.Carros.SingleOrDefault(c => c.Id == id);
+
+            if (carros == null)
+                return HttpNotFound();
+
+
+            return View("CarroForm", carros);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            var carros = _context.Carros.SingleOrDefault(c => c.Id == id);
+
+            if (carros == null)
+                return HttpNotFound();
+
+            _context.Carros.Remove(carros);
+            _context.SaveChanges();
+
+            return new HttpStatusCodeResult(200);
         }
     }
 }

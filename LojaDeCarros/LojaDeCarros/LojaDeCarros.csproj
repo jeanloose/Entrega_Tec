@@ -191,15 +191,50 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CarrosController.cs" />
+    <Compile Include="Controllers\ClientesController.cs" />
+    <Compile Include="Controllers\FornecedoresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711072235590_inicial.cs" />
+    <Compile Include="Migrations\201711072235590_inicial.Designer.cs">
+      <DependentUpon>201711072235590_inicial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711072239530_corrigeNomeTabelaCarros.cs" />
+    <Compile Include="Migrations\201711072239530_corrigeNomeTabelaCarros.Designer.cs">
+      <DependentUpon>201711072239530_corrigeNomeTabelaCarros.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711072343065_novoModel.cs" />
+    <Compile Include="Migrations\201711072343065_novoModel.Designer.cs">
+      <DependentUpon>201711072343065_novoModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711142247055_teste2.cs" />
+    <Compile Include="Migrations\201711142247055_teste2.Designer.cs">
+      <DependentUpon>201711142247055_teste2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711212243015_vai3.cs" />
+    <Compile Include="Migrations\201711212243015_vai3.Designer.cs">
+      <DependentUpon>201711212243015_vai3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711282159214_1.cs" />
+    <Compile Include="Migrations\201711282159214_1.Designer.cs">
+      <DependentUpon>201711282159214_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712032357373_ver.cs" />
+    <Compile Include="Migrations\201712032357373_ver.Designer.cs">
+      <DependentUpon>201712032357373_ver.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Carro.cs" />
+    <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Models\Fornecedor.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -210,12 +245,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\helper.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -223,6 +261,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modelo-pt.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -260,7 +299,18 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Carros\Random.cshtml" />
+    <Content Include="Views\Carros\Index.cshtml" />
+    <Content Include="Views\Clientes\Index.cshtml" />
+    <Content Include="Views\Usuarios\Index.cshtml" />
+    <Content Include="Views\Fornecedores\Index.cshtml" />
+    <Content Include="Views\Clientes\ClienteForm.cshtml" />
+    <Content Include="Views\Clientes\Details.cshtml" />
+    <Content Include="Views\Carros\Details.cshtml" />
+    <Content Include="Views\Fornecedores\Details.cshtml" />
+    <Content Include="Views\Usuarios\Details.cshtml" />
+    <Content Include="Views\Carros\CarroForm.cshtml" />
+    <Content Include="Views\Fornecedores\FornecedorForm.cshtml" />
+    <Content Include="Views\Usuarios\UsuarioForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -277,6 +327,29 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201711072235590_inicial.resx">
+      <DependentUpon>201711072235590_inicial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711072239530_corrigeNomeTabelaCarros.resx">
+      <DependentUpon>201711072239530_corrigeNomeTabelaCarros.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711072343065_novoModel.resx">
+      <DependentUpon>201711072343065_novoModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711142247055_teste2.resx">
+      <DependentUpon>201711142247055_teste2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711212243015_vai3.resx">
+      <DependentUpon>201711212243015_vai3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711282159214_1.resx">
+      <DependentUpon>201711282159214_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712032357373_ver.resx">
+      <DependentUpon>201712032357373_ver.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

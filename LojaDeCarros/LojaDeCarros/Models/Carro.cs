@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace LojaDeCarros.Models
 {
+    [Table("Carros")]
     public class Carro
     {
-        public int id { get; set; }
-        public string marca { get; set; }
-        public string modelo { get; set; }
-        public string ano { get; set; }
+        public int Id { get; set; }
+        public string Marca { get; set; }
+        public string Modelo { get; set; }
+        public string Ano { get; set; }
     }
 }

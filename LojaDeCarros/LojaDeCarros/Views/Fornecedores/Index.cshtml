@@ -1,0 +1,57 @@
+﻿@model IEnumerable<LojaDeCarros.Models.Fornecedor>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Fornecedores</h2>
+<p>
+    @Html.ActionLink("Novo Cliente", "New", null, new { @class = "btn btn-primary" })
+</p>
+
+<table id="fornecedores" style="width:100%">
+    <tr>
+        <th>Nome</th>
+        <th>CNPJ</th>
+        <th>Linha</th>
+        <th>Ver</th>
+        <th>Editar</th>
+        <th>Remover</th>
+    </tr>
+    @foreach (var fornecedor in @Model)
+    {
+        <tr>
+            <td>@fornecedor.Nome</td>
+            <td>@fornecedor.Cnpj</td>
+            <td>@fornecedor.Linha</td>
+            <td>@Html.ActionLink("Ver", "Details", new { fornecedor.Id }, new { @class = "btn btn-primary" })</td>
+            <td>@Html.ActionLink("Editar", "Edit", new { fornecedor.Id }, new { @class = "btn btn-primary" })</td>
+            <td><button data-fornecedores-id="@fornecedor.Id" class="btn-link js-delete">Remover</button></td>
+        </tr>
+
+    }
+</table>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#fornecedores").on("click", ".js-delete",
+                function () {
+                    var button = $(this);
+                    bootbox.confirm("Tem certeza que deseja remover?",
+                        function (result) {
+                            if (result) {
+                                $.ajax({
+                                    url: "/fornecedores/delete/" + button.attr("data-fornecedores-id"),
+                                    method: "GET",
+                                    success: function () {
+                                        button.parents("tr").remove();
+                                    }
+                                });
+                            }
+                        });
+
+                });
+        });
+    </script>
+}

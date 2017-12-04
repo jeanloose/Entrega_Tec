@@ -1,0 +1,41 @@
+﻿
+@model LojaDeCarros.Models.Carro
+@{
+    ViewBag.Title = "Novo Carro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Carro</h2>
+@using (Html.BeginForm("Save", "Carros"))
+{
+    @Html.HiddenFor(m => m.Id)
+    <div class="form-group">
+        @Html.LabelFor(m => m.Marca)
+        @Html.TextBoxFor(m => m.Marca, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Marca)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Modelo)
+        @Html.TextBoxFor(m => m.Modelo, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Modelo)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Ano)
+        @Html.TextBoxFor(m => m.Ano, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Ano)
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(function () {
+            $.validator.methods.date = function (value, element) {
+                Globalize.culture("pt-BR");
+                return this.optional(element) || Globalize.parseDate(value) !== null;
+            }
+        })
+    </script>
+}
