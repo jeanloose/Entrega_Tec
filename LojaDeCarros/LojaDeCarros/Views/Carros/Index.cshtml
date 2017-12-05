@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<LojaDeCarros.Models.Carro>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Carros";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Carros</h2>
 <p>
-    @Html.ActionLink("Novo Cliente", "New", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Novo Carro", "New", null, new { @class = "btn btn-primary" })
 </p>
 
 <table id="carros" style="width:100%">
