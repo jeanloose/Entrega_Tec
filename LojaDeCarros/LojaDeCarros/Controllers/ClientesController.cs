@@ -25,17 +25,10 @@ namespace LojaDeCarros.Controllers
         {
             var clientes = _context.Clientes.ToList();
 
-            return View(clientes);
-        }
-        public ActionResult Details(int id)
-        {
-            var cliente = _context.Clientes.SingleOrDefault(c => c.Id == id);
-            if (cliente == null)
-            {
-                return HttpNotFound();
-            }
+            if (User.IsInRole(RoleName.CanManageCustomers))
+                return View(clientes);
 
-            return View(cliente);
+            return View("ReadOnlyIndex", clientes);
         }
 
         public ActionResult New()

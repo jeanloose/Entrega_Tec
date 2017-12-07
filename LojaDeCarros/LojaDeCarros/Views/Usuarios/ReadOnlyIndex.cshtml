@@ -1,0 +1,27 @@
+﻿@model IEnumerable<LojaDeCarros.Models.Usuario>
+@{
+    ViewBag.Title = "Usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Usuarios</h2>
+<p>
+    @Html.ActionLink("Novo Usuario", "New", null, new { @class = "btn btn-primary" })
+</p>
+
+<table id="usuarios" style="width:100%">
+    <tr>
+        <th>Nome</th>
+        <th>E-mail</th>
+        <th>Senha</th>
+    </tr>
+    @foreach (var usuario in @Model)
+    {
+        <tr>
+            <td>@usuario.Nome</td>
+            <td>@usuario.Email</td>
+            <td>@usuario.Senha</td>
+        </tr>
+
+    }
+</table>

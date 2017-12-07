@@ -1,0 +1,35 @@
+﻿@model IEnumerable<LojaDeCarros.Models.Carro>
+@{
+    ViewBag.Title = "Carros";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Carros</h2>
+<p>
+    @Html.ActionLink("Novo Carro", "New", null, new { @class = "btn btn-primary" })
+
+</p>
+@if (!Model.Any())
+{
+    <p>Não temos nenhum carro ainda.</p>
+}
+
+<table id="carros" style="width:100%">
+    <tr>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Ano</th>
+    </tr>
+    @foreach (var carro in @Model)
+    {
+        <tr>
+            <td>@carro.Marca</td>
+            <td>@carro.Modelo</td>
+            <td>@carro.Ano</td>
+        </tr>
+
+    }
+</table>
+
+
+

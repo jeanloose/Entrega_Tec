@@ -24,17 +24,10 @@ namespace LojaDeCarros.Controllers
         public ActionResult Index()
         {
             var usuarios = _context.Usuarios.ToList();
-            return View(usuarios);
-        }
-        public ActionResult Details(int id)
-        {
-            var usuario = _context.Usuarios.SingleOrDefault(c => c.Id == id);
-            if (usuario == null)
-            {
-                return HttpNotFound();
-            }
+            if (User.IsInRole(RoleName.CanManageCustomers))
+                return View(usuarios);
 
-            return View(usuario);
+            return View("ReadOnlyIndex", usuarios);
         }
 
         public ActionResult New()

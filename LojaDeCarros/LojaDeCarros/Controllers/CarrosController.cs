@@ -25,19 +25,13 @@ namespace LojaDeCarros.Controllers
         {
             var carros = _context.Carros.ToList();
 
+            if (User.IsInRole(RoleName.CanManageCustomers))
             return View(carros);
-        }
-        public ActionResult Details(int id)
-        {
-            var carros = _context.Carros.SingleOrDefault(c => c.Id == id);
-            if (carros == null)
-            {
-                return HttpNotFound();
-            }
 
-            return View(carros);
+            return View("ReadOnlyIndex", carros);
         }
 
+        [Authorize(Roles = RoleName.CanManageCustomers)]
         public ActionResult New()
         {
             var carros = new Carro();
@@ -45,8 +39,8 @@ namespace LojaDeCarros.Controllers
             return View("CarroForm", carros);
         }
 
-        [HttpPost] 
-
+        [HttpPost]
+        [Authorize(Roles = RoleName.CanManageCustomers)]
         public ActionResult Save(Carro carros)
         {
 
@@ -76,6 +70,7 @@ namespace LojaDeCarros.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = RoleName.CanManageCustomers)]
         public ActionResult Edit(int id)
         {
             var carros = _context.Carros.SingleOrDefault(c => c.Id == id);
@@ -87,6 +82,7 @@ namespace LojaDeCarros.Controllers
             return View("CarroForm", carros);
         }
 
+        [Authorize(Roles = RoleName.CanManageCustomers)]
         public ActionResult Delete(int id)
         {
             var carros = _context.Carros.SingleOrDefault(c => c.Id == id);

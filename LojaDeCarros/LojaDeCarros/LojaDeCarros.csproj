@@ -234,6 +234,7 @@
     <Compile Include="Models\Fornecedor.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\RoleName.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -311,6 +312,10 @@
     <Content Include="Views\Carros\CarroForm.cshtml" />
     <Content Include="Views\Fornecedores\FornecedorForm.cshtml" />
     <Content Include="Views\Usuarios\UsuarioForm.cshtml" />
+    <Content Include="Views\Carros\ReadOnlyIndex.cshtml" />
+    <Content Include="Views\Clientes\ReadOnlyIndex.cshtml" />
+    <Content Include="Views\Fornecedores\ReadOnlyIndex.cshtml" />
+    <Content Include="Views\Usuarios\ReadOnlyIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
